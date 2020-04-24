@@ -1,9 +1,10 @@
-import { MovieStateInterface, movieReducer } from './store/movies/movie.reducer';
+import {
+  MovieStateInterface,
+  MOVIE_FEATURE_STATE_NAME,
+} from "./modules/movie-rating/store/movies/movie.reducer";
 
 export interface AppState {
-  movies: MovieStateInterface;
+  [MOVIE_FEATURE_STATE_NAME]: MovieStateInterface;
 }
 
-export const AppStore = {
-  movies: movieReducer
-}
+export const AppStore = {};

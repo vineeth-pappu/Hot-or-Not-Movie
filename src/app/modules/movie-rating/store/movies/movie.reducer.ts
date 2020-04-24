@@ -1,8 +1,10 @@
 import { MovieActions, MovieActionTypes } from "./movie.action";
-import { Genre } from "src/app/models/genre.model";
-import { Language } from "src/app/models/language.model";
-import { MoviesFilter } from "src/app/models/movies-filter";
-import { Movie } from "src/app/models/movie.model";
+import { Movie } from "../../models/movie.model";
+import { Genre } from "../../models/genre.model";
+import { Language } from "../../models/language.model";
+import { MoviesFilter } from "../../models/movies-filter";
+
+export const MOVIE_FEATURE_STATE_NAME = "movies";
 
 export interface MovieStateInterface {
   movies: Movie[];

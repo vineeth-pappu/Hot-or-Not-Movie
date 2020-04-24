@@ -8,8 +8,8 @@
             <label for="">Choose Language</label>
             <select class="custom-select" aria-label="Example select with button addon" [(ngModel)]="formData.language">
         <option selected
-          disabled
-          value="">Choose...</option>
+                disabled
+                value="">Choose...</option>
         <ng-container *ngFor="let l of (languages$ | async)">
           <option value="{{l.iso_639_1}}"> {{ l.english_name }} </option>
         </ng-container>
@@ -20,8 +20,8 @@
             <label for="">Choose Genre</label>
             <select class="custom-select" aria-label="Example select with button addon" [(ngModel)]="formData.genre">
         <option selected
-          disabled
-          value="">Choose...</option>
+                disabled
+                value="">Choose...</option>
         <ng-container *ngFor="let g of (genres$ | async)">
           <option value="{{g.id}}"> {{ g.name }} </option>
         </ng-container>

@@ -1,26 +1,23 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { CompareMoviesContainerComponent } from './containers/compare-movies-container/compare-movies-container.component';
-import { LeaderboardContainerComponent } from './containers/leaderboard-container/leaderboard-container.component';
-import { WelcomeContainerComponent } from './containers/welcome-container/welcome-container.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: WelcomeContainerComponent
+    path: "",
+    redirectTo: "/movie-rating",
+    pathMatch: "full",
   },
   {
-    path: 'movie-rating',
-    component: CompareMoviesContainerComponent
+    path: "movie-rating",
+    loadChildren: () =>
+      import("./modules/movie-rating/movie-rating.module").then(
+        (m) => m.MovieRatingModule
+      ),
   },
-  {
-    path: 'leaderboard',
-    component: LeaderboardContainerComponent
-  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

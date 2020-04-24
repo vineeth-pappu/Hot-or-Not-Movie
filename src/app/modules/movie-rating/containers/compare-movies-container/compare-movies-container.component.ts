@@ -1,28 +1,22 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { AppService } from "src/app/services/app.service";
-import { environment } from "src/environments/environment";
 import { AppState } from "src/app/app.state";
 import { Store, select } from "@ngrx/store";
-import {
-  getMoviesFilter,
-  getMovies,
-} from "src/app/store/movies/movie.selectors";
-import {
-  LoadMovies,
-  UpdateMovieVotes,
-  UpdateMoviesFiler,
-  ResetMovies,
-} from "src/app/store/movies/movie.action";
-import { GetMoviesRequest } from "src/app/models/request/get-movies.request";
-import { Movie } from "src/app/models/movie.model";
 import { Router } from "@angular/router";
-import { MoviesFilter } from "src/app/models/movies-filter";
-import { Subscription } from "rxjs";
+import { Movie } from "../../models/movie.model";
 import {
   MovieSlots,
   FIRST_MOVIE_INDEX,
   SECOND_MOVIE_INDEX,
-} from "src/app/constants/movie-slots.constant";
+} from "../../constants/movie-slots.constant";
+import { MoviesFilter } from "../../models/movies-filter";
+import { Subscription } from "rxjs";
+import {
+  ResetMovies,
+  LoadMovies,
+  UpdateMoviesFiler,
+} from "../../store/movies/movie.action";
+import { getMoviesFilter, getMovies } from "../../store/movies/movie.selectors";
+import { GetMoviesRequest } from "../../models/request/get-movies.request";
 
 @Component({
   selector: "app-compare-movies-container",
@@ -112,6 +106,6 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
   }
 
   goToLeaderboard(): void {
-    this.router.navigate(["/leaderboard"]);
+    this.router.navigate(["/movie-rating/leaderboard"]);
   }
 }

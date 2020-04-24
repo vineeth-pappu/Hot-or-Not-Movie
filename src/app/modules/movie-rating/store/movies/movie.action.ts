@@ -1,9 +1,9 @@
 import { Action } from "@ngrx/store";
-import { Language } from "src/app/models/language.model";
-import { Genre } from "src/app/models/genre.model";
-import { GetMoviesRequest } from "src/app/models/request/get-movies.request";
-import { Movie } from "src/app/models/movie.model";
-import { MoviesFilter } from "src/app/models/movies-filter";
+import { MoviesFilter } from "../../models/movies-filter";
+import { GetMoviesRequest } from "../../models/request/get-movies.request";
+import { Movie } from "../../models/movie.model";
+import { Genre } from "../../models/genre.model";
+import { Language } from "../../models/language.model";
 
 export enum MovieActionTypes {
   LOAD_MOVIES = "[Movies] Load Movies",
