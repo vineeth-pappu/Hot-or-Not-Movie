@@ -1,31 +1,34 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AppService } from 'src/app/services/app.service';
-import { environment } from 'src/environments/environment';
-import { AppState } from 'src/app/app.state';
-import { Store, select } from '@ngrx/store';
-import { getMoviesFilter, getMovies } from 'src/app/store/movies/movie.selectors';
-import { LoadMovies, UpdateMovieVotes, UpdateMoviesFiler } from 'src/app/store/movies/movie.action';
-import { GetMoviesRequest } from 'src/app/models/request/get-movies.request';
-import { Movie } from 'src/app/models/movie.model';
-import { Router } from '@angular/router';
-import { MoviesFilter } from 'src/app/models/movies-filter';
-import { Subscription } from 'rxjs';
-
-export const FIRST_MOVIE_INDEX = 0;
-export const SECOND_MOVIE_INDEX = 1;
-
-export enum MovieSlots {
-  LEFT_SLOT = 'LEFT_SLOT',
-  RIGHT_SLOT = 'RIGHT_SLOT'
-}
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { AppService } from "src/app/services/app.service";
+import { environment } from "src/environments/environment";
+import { AppState } from "src/app/app.state";
+import { Store, select } from "@ngrx/store";
+import {
+  getMoviesFilter,
+  getMovies,
+} from "src/app/store/movies/movie.selectors";
+import {
+  LoadMovies,
+  UpdateMovieVotes,
+  UpdateMoviesFiler,
+} from "src/app/store/movies/movie.action";
+import { GetMoviesRequest } from "src/app/models/request/get-movies.request";
+import { Movie } from "src/app/models/movie.model";
+import { Router } from "@angular/router";
+import { MoviesFilter } from "src/app/models/movies-filter";
+import { Subscription } from "rxjs";
+import {
+  MovieSlots,
+  FIRST_MOVIE_INDEX,
+  SECOND_MOVIE_INDEX,
+} from "src/app/constants/movie-slots.constant";
 
 @Component({
-  selector: 'app-compare-movies-container',
-  templateUrl: './compare-movies-container.component.html',
-  styleUrls: ['./compare-movies-container.component.sass']
+  selector: "app-compare-movies-container",
+  templateUrl: "./compare-movies-container.component.html",
+  styleUrls: ["./compare-movies-container.component.sass"],
 })
 export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
-
   movies: Movie[] = [];
   MovieSlots = MovieSlots;
 
@@ -38,19 +41,19 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private router: Router, private store: Store<AppState>) { }
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.store.pipe(select(getMoviesFilter)).subscribe(
-        moviesFilter => this.moviesFilter = moviesFilter
-      )
+      this.store
+        .pipe(select(getMoviesFilter))
+        .subscribe((moviesFilter) => (this.moviesFilter = moviesFilter))
     );
 
     this.subscriptions.add(
-      this.store.pipe(select(getMovies)).subscribe(
-        movies => this.movies = movies
-      )
+      this.store
+        .pipe(select(getMovies))
+        .subscribe((movies) => (this.movies = movies))
     );
 
     this.loadMovies();
@@ -64,15 +67,16 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
     const req: GetMoviesRequest = {
       with_genres: this.moviesFilter.genre,
       page: this.moviesFilter.pageNo,
-      language: this.moviesFilter.language
+      language: this.moviesFilter.language,
     };
 
     this.store.dispatch(new LoadMovies(req));
   }
 
-
   loadNextPage(): void {
-    this.store.dispatch(new UpdateMoviesFiler({ pageNo: this.moviesFilter.pageNo + 1 }));
+    this.store.dispatch(
+      new UpdateMoviesFiler({ pageNo: this.moviesFilter.pageNo + 1 })
+    );
     this.loadMovies();
   }
 
@@ -105,8 +109,6 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
   }
 
   goToLeaderboard(): void {
-    this.router.navigate(['/leaderboard']);
+    this.router.navigate(["/leaderboard"]);
   }
-
-
 }
