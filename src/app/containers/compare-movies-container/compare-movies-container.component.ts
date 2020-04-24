@@ -11,6 +11,7 @@ import {
   LoadMovies,
   UpdateMovieVotes,
   UpdateMoviesFiler,
+  ResetMovies,
 } from "src/app/store/movies/movie.action";
 import { GetMoviesRequest } from "src/app/models/request/get-movies.request";
 import { Movie } from "src/app/models/movie.model";
@@ -41,7 +42,9 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private router: Router, private store: Store<AppState>) {}
+  constructor(private router: Router, private store: Store<AppState>) {
+    store.dispatch(new ResetMovies());
+  }
 
   ngOnInit(): void {
     this.subscriptions.add(
