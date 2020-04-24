@@ -1,0 +1,29 @@
+<section class="movie-rating-wrapper">
+    <div class="container-fluid">
+        <h1>Vote For Your Favourite Movie </h1>
+
+        <div class="movie-compare-wraper" *ngIf="movies.length > 0">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <app-movie-container class="movie-wrapper" [movie]="movies[LEFT_SLOT_MOVIE_INDEX]" [movieIndex]="LEFT_SLOT_MOVIE_INDEX" (getMovieToCompare)="getNextMovie(MovieSlots.LEFT_SLOT)"></app-movie-container>
+                </div>
+
+                <div class="col-md-6">
+                    <app-movie-container class="movie-wrapper" [movie]="movies[RIGHT_SLOT_MOVIE_INDEX]" [movieIndex]="RIGHT_SLOT_MOVIE_INDEX" (getMovieToCompare)="getNextMovie(MovieSlots.RIGHT_SLOT)"></app-movie-container>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="finish-btn-wrapper">
+                        <app-button [fullWidth]="true" (click)="goToLeaderboard()">
+                            Submit and View Leaderboard
+                        </app-button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
