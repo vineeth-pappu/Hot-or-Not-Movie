@@ -23,16 +23,7 @@ export const getMovies = createSelector(
   (state) => state.movies
 );
 
-export const getMoviesLeaderboard = createSelector(selectMovieState, (state) =>
-  state.movies
-    .map((m) => m)
-    .sort((a, b) => {
-      if (a.vote_count < b.vote_count) {
-        return 1;
-      }
-      if (a.vote_count > b.vote_count) {
-        return -1;
-      }
-      return 0;
-    })
+export const getMoviesLeaderboard = createSelector(
+  selectMovieState,
+  (state) => state.leaderboard
 );

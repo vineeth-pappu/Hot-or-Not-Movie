@@ -15,6 +15,7 @@ export enum MovieActionTypes {
   UPDATE_MOVIE_FILTERS = "[Movies] Update Movies Filter",
   UPDATE_MOVIE_VOTES = "[Movies] Update Movie Votes",
   RESET_MOVIES = "[Movies] Reset Movies",
+  SUBMIT_MOVIES_TO_LEADERBOARD = "[Movies] Submit Movies to Leaderboard",
 }
 
 export class UpdateMoviesFiler implements Action {
@@ -71,6 +72,12 @@ export class ResetMovies implements Action {
   constructor() {}
 }
 
+export class SubmitMoviesToLeaderboard implements Action {
+  readonly type = MovieActionTypes.SUBMIT_MOVIES_TO_LEADERBOARD;
+
+  constructor(public payload: Movie[]) {}
+}
+
 export type MovieActions =
   | LoadMovies
   | UpdateMoviesFiler
@@ -81,4 +88,5 @@ export type MovieActions =
   | LoadGenresSuccess
   | LoadLanguages
   | LoadLanguagesSuccess
-  | ResetMovies;
+  | ResetMovies
+  | SubmitMoviesToLeaderboard;

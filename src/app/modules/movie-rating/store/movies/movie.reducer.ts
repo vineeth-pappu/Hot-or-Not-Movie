@@ -11,6 +11,7 @@ export interface MovieStateInterface {
   genres: Genre[];
   languages: Language[];
   moviesFilter: MoviesFilter;
+  leaderboard: Movie[];
 }
 
 const initialState: MovieStateInterface = {
@@ -22,6 +23,7 @@ const initialState: MovieStateInterface = {
     genre: "",
     pageNo: 1,
   },
+  leaderboard: [],
 };
 
 export function movieReducer(state = initialState, action: MovieActions) {
@@ -73,6 +75,22 @@ export function movieReducer(state = initialState, action: MovieActions) {
       return {
         ...state,
         movies: [],
+      };
+
+    case MovieActionTypes.SUBMIT_MOVIES_TO_LEADERBOARD:
+      return {
+        ...state,
+        leaderboard: action.payload
+          .map((m) => m)
+          .sort((a, b) => {
+            if (a.vote_count < b.vote_count) {
+              return 1;
+            }
+            if (a.vote_count > b.vote_count) {
+              return -1;
+            }
+            return 0;
+          }),
       };
 
     default:

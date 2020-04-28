@@ -14,6 +14,7 @@ import {
   ResetMovies,
   LoadMovies,
   UpdateMoviesFiler,
+  SubmitMoviesToLeaderboard,
 } from "../../store/movies/movie.action";
 import { getMoviesFilter, getMovies } from "../../store/movies/movie.selectors";
 import { GetMoviesRequest } from "../../models/request/get-movies.request";
@@ -103,7 +104,8 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
     return this.movies[movieIndex] ? true : false;
   }
 
-  goToLeaderboard(): void {
+  SubmitAndGoToLeaderboard(): void {
+    this.store.dispatch(new SubmitMoviesToLeaderboard(this.movies));
     this.router.navigate(["/movie-rating/leaderboard"]);
   }
 }
