@@ -17,6 +17,7 @@ import {
 } from "../../store/movies/movie.action";
 import { getMoviesFilter, getMovies } from "../../store/movies/movie.selectors";
 import { GetMoviesRequest } from "../../models/request/get-movies.request";
+import { GetMoviesRequestTransformer } from "../../models/transformer/get-movies-request.transformer";
 
 @Component({
   selector: "app-compare-movies-container",
@@ -61,12 +62,9 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
   }
 
   loadMovies(): void {
-    const req: GetMoviesRequest = {
-      with_genres: this.moviesFilter.genre,
-      page: this.moviesFilter.pageNo,
-      language: this.moviesFilter.language,
-    };
-
+    const req: GetMoviesRequest = new GetMoviesRequestTransformer(
+      this.moviesFilter
+    );
     this.store.dispatch(new LoadMovies(req));
   }
 
