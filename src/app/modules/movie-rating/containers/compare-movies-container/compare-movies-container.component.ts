@@ -38,9 +38,7 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private router: Router, private store: Store<AppState>) {
-    store.dispatch(new ResetMovies());
-  }
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -59,6 +57,7 @@ export class CompareMoviesContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.store.dispatch(new ResetMovies());
     this.subscriptions.unsubscribe();
   }
 
