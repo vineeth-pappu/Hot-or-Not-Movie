@@ -1,30 +1,7 @@
 import { MovieActions, MovieActionTypes } from "./movie.action";
-import { Movie } from "../../models/movie.model";
-import { Genre } from "../../models/genre.model";
-import { Language } from "../../models/language.model";
-import { MoviesFilter } from "../../models/movies-filter";
+import { initialState } from "./movie.state";
 
 export const MOVIE_FEATURE_STATE_NAME = "movies";
-
-export interface MovieStateInterface {
-  movies: Movie[];
-  genres: Genre[];
-  languages: Language[];
-  moviesFilter: MoviesFilter;
-  leaderboard: Movie[];
-}
-
-const initialState: MovieStateInterface = {
-  movies: [],
-  genres: [],
-  languages: [],
-  moviesFilter: {
-    language: "en",
-    genre: "",
-    pageNo: 1,
-  },
-  leaderboard: [],
-};
 
 export function movieReducer(state = initialState, action: MovieActions) {
   switch (action.type) {
